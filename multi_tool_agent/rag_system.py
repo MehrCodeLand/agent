@@ -10,7 +10,7 @@ from document_loader import load_pdf, chunk_text
 # 1) Initialize core components
 # -----------------------------------------------------------------------------
 db = QdrantDB(
-    url=os.getenv("QDRANT_URL", "127.0.0.1"),
+    url=os.getenv("QDRANT_URL", "http://localhost:6333/"),
     port=int(os.getenv("QDRANT_PORT", 6333)),
     vector_size=384,
     collection_name=os.getenv("QDRANT_COLLECTION", "rag_collection"),
@@ -81,6 +81,6 @@ def answer_question(question: str, top_k: int = 5) -> str:
 # 4) Example usage
 # -----------------------------------------------------------------------------
 if __name__ == "__main__":
-    ingest_pdf("annual_report_2024.pdf")  # or ingest_folder("docs/")
+    ingest_pdf("./docs/myRag.pdf")  # or ingest_folder("docs/")
     reply = answer_question("What was our total revenue in Q2?")
     print("Assistant reply:", reply)
